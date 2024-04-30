@@ -15,7 +15,7 @@ namespace cmd_smoother_ros2
             50ms,
             std::bind(&cmd_smoother_ros2::CmdSmootherROS2::timer_callback, this));
 
-        this->declare_parameter("up_gain", 0.1);
+        this->declare_parameter("up_gain", 0.3);
         this->get_parameter("up_gain", up_gain_);
         this->declare_parameter("down_gain", 0.1);
         this->get_parameter("down_gain", down_gain_);
@@ -52,11 +52,25 @@ namespace cmd_smoother_ros2
         {
             if(target_.linear.x > now_.linear.x)
             {
-                send.linear.x = now_.linear.x + up_gain_;
+                if(now_.linear.x < 0.0)
+                {
+                    send.linear.x = now_.linear.x + down_gain_;
+                }
+                else
+                {
+                    send.linear.x = now_.linear.x + up_gain_;
+                }
             }
             else
             {
-                send.linear.x = now_.linear.x - down_gain_;
+                if(target_.linear.x < 0.0)
+                {
+                    send.linear.x = now_.linear.x - up_gain_;
+                }
+                else
+                {
+                    send.linear.x = now_.linear.x - down_gain_;
+                }
             }
         }
         else
@@ -72,11 +86,25 @@ namespace cmd_smoother_ros2
         {
             if(target_.linear.y > now_.linear.y)
             {
-                send.linear.y = now_.linear.y + up_gain_;
+                if(now_.linear.y < 0.0)
+                {
+                    send.linear.y = now_.linear.y + down_gain_;
+                }
+                else
+                {
+                    send.linear.y = now_.linear.y + up_gain_;
+                }
             }
             else
             {
-                send.linear.y = now_.linear.y - down_gain_;
+                if(target_.linear.y < 0.0)
+                {
+                    send.linear.y = now_.linear.y - up_gain_;
+                }
+                else
+                {
+                    send.linear.y = now_.linear.y - down_gain_;
+                }
             }
         }
         else
@@ -93,11 +121,25 @@ namespace cmd_smoother_ros2
         {
             if(target_.angular.z > now_.angular.z)
             {
-                send.angular.z = now_.angular.z + up_gain_;
+                if(now_.angular.z < 0.0)
+                {
+                    send.angular.z = now_.angular.z + down_gain_;
+                }
+                else
+                {
+                    send.angular.z = now_.angular.z+ up_gain_;
+                }
             }
             else
             {
-                send.angular.z = now_.angular.z - down_gain_;
+                if(target_.angular.z < 0.0)
+                {
+                    send.angular.z = now_.angular.z - up_gain_;
+                }
+                else
+                {
+                    send.angular.z = now_.angular.z - down_gain_;
+                }
             }
         }
         else
