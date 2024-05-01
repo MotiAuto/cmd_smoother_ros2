@@ -2,7 +2,7 @@
 
 namespace cmd_smoother_ros2
 {
-    CmdSmootherROS2::CmdSmootherROS2(const rclcpp::NodeOptions & node_options):Node("vel_sm_ros2_node", node_options)
+    CmdSmootherROS2::CmdSmootherROS2(const rclcpp::NodeOptions & node_options):Node("cmd_smoother_ros2_node", node_options)
     {
         subscriber_ = this->create_subscription<geometry_msgs::msg::Twist>(
             "/cmd_vel",
