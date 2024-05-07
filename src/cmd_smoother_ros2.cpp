@@ -38,7 +38,7 @@ namespace cmd_smoother_ros2
             50ms,
             std::bind(&cmd_smoother_ros2::CmdSmootherROS2::twist_timer_callback, this));
         }
-        else if(msg_type_ == "float32")
+        else if(msg_type_ == "float")
         {
             sub_float_ = this->create_subscription<std_msgs::msg::Float32>(
                 "/float",
