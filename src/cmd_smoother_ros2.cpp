@@ -215,7 +215,7 @@ namespace cmd_smoother_ros2
         {
             send.data = target_float_.data;
         }
-        now_twist_.linear.x = send.data;
+        now_float_.data = send.data;
 
         float_publisher_->publish(send);
     }
